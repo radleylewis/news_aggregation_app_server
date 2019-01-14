@@ -1,9 +1,9 @@
-const mongoSetup = require('../models/mongosetupUserData.js');
+const mongoDB = require('../models/database/mongoDB.js');
 const router = require('../router.js');
 const btoa = require('atob');
 
 exports.addUser = async (req, res) => {
-  const data = await mongoSetup.addUser(req.body);
+  const data = await mongoDB.addUser(req.body);
   res.status(200).send(data);
 };
 
@@ -13,8 +13,8 @@ exports.signIn = async (req, res) => {
     throw new Error('Missing authentication data');
   }
   const [username, password] = btoa(basic[1]).split(':');
-  const usr = await mongoSetup.getUser(username);
-  const stories = await mongoSetup.getArticles();
+  const usr = await mongoDB.getUser(username);
+  const stories = await mongoDB.getArticles();
 
   if (usr && usr.password === password) {
     const responseData = {
@@ -35,17 +35,16 @@ exports.signIn = async (req, res) => {
 
 exports.addPrefSource = async (req, res) => {
   console.log(req.body.username);
-  const userSourceList = await mongoSetup.addUserSource(req.body.username, req.body.sources);
+  const userSourceList = await mongoDB.addUserSource(req.body.username, req.body.sources);
   res.status(200);
 }
 
 exports.deploySources = async (req, res) => {
-  const sourceList = await mongoSetup.getSourceList();
+  const sourceList = await mongoDB.getSourceList();
   res.status(200).send(sourceList);
 }
 
 exports.deployStories = async (req, res) => {
-  console.log('getting stories');
-  const storyList = await mongoSetup.getArticles(req.body.preferences);
+  const storyList = await mongoDB.getArticles(req.body.preferences);
   res.status(200).send(storyList);
 }
