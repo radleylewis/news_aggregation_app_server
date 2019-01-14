@@ -9,4 +9,5 @@ module.exports = {
   baseURL,
   apiKey,
   mongoAddress,
+  updateInterval,
 }

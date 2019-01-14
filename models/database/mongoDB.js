@@ -25,14 +25,28 @@ exports.addUser = function (incoming) {
 
   User.save(function (error, result) {
     if (error) {
-    console.error(error);
+      console.error(error);
     };
-    return result;
+      console.log('Added new user with the following credentials: ', result);
   });
 }
 
 exports.getUser = function ( username ) {
   return Users.findOne({ username: username });
+}
+
+exports.damageRating = function ( sourceName ) {
+  const query = { name: sourceName };
+  const update = { $inc: { rating: -1 } };
+  const options = null;
+  
+  Sources.findOneAndUpdate(query, update, options, function(error, result) {
+    if (error) {
+      return console.log('Error changing rating');
+    } else {
+      return console.log('Noted rating change for ' + sourceName);
+    }
+  });
 }
 
 exports.placeArticles = function ( incoming ) {

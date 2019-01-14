@@ -44,8 +44,7 @@ exports.sourcesSchema = new Schema({
   },
   rating: {
     type: Number,
-    required: [false],
-    default: 1.0
+    default: 1
   }
 });
 
