@@ -22,5 +22,5 @@ const initiateNewsUpdate = async () => {
 }
 
 exports.newsWorker = () => {
-  // setInterval(() => { updateNews() }, config.updateInterval);
-};
+  setInterval(() => { initiateNewsUpdate() }, config.updateInterval);
+}
