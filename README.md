@@ -43,10 +43,6 @@ $ npm serve
 
 Any contribution is welcome, just fork the repository and do your thing. Then submit a pull request pointing to this repo.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Author
 
 Radley Sidwell-Lewis: [Github](https://github.com/radleylewis) & [LinkedIn](https://www.linkedin.com/in/rad-e-sidwell-lewis/)
