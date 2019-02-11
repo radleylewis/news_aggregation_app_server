@@ -1,0 +1,23 @@
+{
+  "name": "news_aggregation_app_server",
+  "version": "1.0.0",
+  "description": "https://newsapi.org/ API Key: 30e8f2b5af1b4b8185a3159ece2a9269",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^6.2.0"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radleylewis/news_aggregation_app_server.git"
+  },
+  "author": "Radley E Sidwell-Lewis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radleylewis/news_aggregation_app_server/issues"
+  },
+  "homepage": "https://github.com/radleylewis/news_aggregation_app_server#readme"
+}

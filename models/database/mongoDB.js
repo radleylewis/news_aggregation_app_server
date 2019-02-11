@@ -1,12 +1,10 @@
-const fs = require('fs');
-const path = require('path');
 const mongoose = require('mongoose');
 const schemas = require('../schemas/schemas.js');
 const config = require('../../config/config.js');
 
-mongoose.connect(config.mongoAddress, function (err) {
-  if (!err) console.log('connected to the database');
-  else console.log(err);
+mongoose.connect(config.mongoAddress, { useNewUrlParser: true }, function (err) {
+	if (!err) console.log('connected to the database'); // eslint-disable-line no-console
+	else console.error(err); // eslint-disable-line no-console
 });
 
 const Users = mongoose.model('user', schemas.userSchema);
@@ -17,7 +15,7 @@ exports.addUser = function (incoming) {
   const User = new Users({
     username: incoming.username,
     password: incoming.password,
-    firstname: incoming.firstname,
+		rstname: incoming.firstname,
     surname: incoming.surname,
     email: incoming.email,
     preferences: incoming.preferences,
@@ -25,9 +23,9 @@ exports.addUser = function (incoming) {
 
   User.save(function (error, result) {
     if (error) {
-      console.error(error);
+      console.error(error); // eslint-disable-line no-console
     };
-      console.log('Added new user with the following credentials: ', result);
+      console.log('Added new user with the following credentials: ', result); // eslint-disable-line no-console
   });
 }
 
@@ -39,7 +37,7 @@ exports.damageRating = function ( sourceName ) {
   const query = { name: sourceName };
   const update = { $inc: { rating: -1 } };
   const options = null;
-  
+
   Sources.findOneAndUpdate(query, update, options, function(error, result) {
     if (error) {
       return console.log('Error changing rating');
@@ -64,23 +62,23 @@ exports.placeArticles = function ( incoming ) {
 }
 
 exports.addUserSource = function (username, sources) {
-  const queryUser = { username: username };
-  const updateUser = { preferences: sources };
-  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+	const queryUser = { username: username };
+	const updateUser = { preferences: sources };
+	const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-  Users.findOneAndUpdate(queryUser, updateUser, options, function(err, result) {
-    if (err) {
-      console.log('Error updating user sources DB');
-    } else {
-      console.log('User source favourites updated');
-    }
-  });
-}
+  Users.findOneAndUpdate(queryUser, updateUser, options, function(err, result) { // eslint-disable-line
+		if (err) {
+			console.log('Error updating user sources DB'); // eslint-disable-line
+		} else {
+			console.log('User source favourites updated'); // eslint-disable-line
+		}
+	});
+};
 
 exports.getArticles = function () {
-  return SourceData.find();
-}
+	return SourceData.find();
+};
 
 exports.getSourceList = function () {
-  return Sources.find();
-}
+	return Sources.find();
+};

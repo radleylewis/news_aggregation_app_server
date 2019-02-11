@@ -1,11 +1,9 @@
 const mongoDB = require('../models/database/mongoDB.js');
-const router = require('../router.js');
 const btoa = require('atob');
 
 exports.addUser = async (req, res) => {
   const data = await mongoDB.addUser(req.body);
-  const stories = await mongoDB.getArticles();
-  res.status(200).send(data);
+  res.status(201).send(data);
 };
 
 exports.addPrefSource = async (req, res) => {

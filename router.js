@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const fs = require('fs');
-
 const controllers = require('./controllers/controllers.js');
 
 router.get('/deploySources', controllers.deploySources);
