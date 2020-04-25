@@ -1,5 +1,7 @@
 import express from 'express';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
+import routeRegistry from './routes';
+import { corsConfig } from './utils';
 
 /* initialize configuration */
 dotenv.config();
@@ -7,5 +9,11 @@ dotenv.config();
 const app = express();
 const port = process.env.SERVER_PORT;
 
+/* set cross origin request configuration */
+corsConfig(app);
+
+/* register routes on app */
+routeRegistry(app);
+
 // tslint:disable-next-line:no-console
-app.listen(port, () => console.log(`server listening on port ${port}`));
+app.listen(port, () => console.log(`server listening on port ${port} 🚀`));
