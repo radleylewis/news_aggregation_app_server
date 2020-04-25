@@ -1,13 +1,17 @@
 {
   "name": "news_aggregation_app_server",
   "version": "1.0.0",
-  "description": "https://newsapi.org/ API Key: 30e8f2b5af1b4b8185a3159ece2a9269",
-  "main": "index.js",
-  "dependencies": {
-    "dotenv": "^6.2.0"
-  },
+  "description": "news aggregator backend express.js service",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node ./index.js",
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "tsc": "tsc",
+    "build": "tsc",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch src -e ts --exec npm run dev:start",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "prestart": "npm run build",
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +23,20 @@
   "bugs": {
     "url": "https://github.com/radleylewis/news_aggregation_app_server/issues"
   },
-  "homepage": "https://github.com/radleylewis/news_aggregation_app_server#readme"
+  "homepage": "https://github.com/radleylewis/news_aggregation_app_server#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/node": "^13.13.2",
+    "nodemon": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.9.0",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
+  }
 }
