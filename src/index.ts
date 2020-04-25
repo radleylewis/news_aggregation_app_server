@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+
+import bodyParser from 'body-parser';
 import routeRegistry from './routes';
 import { corsConfig } from './utils';
 
@@ -8,6 +10,8 @@ dotenv.config();
 
 const app = express();
 const port = process.env.SERVER_PORT;
+
+app.use(bodyParser.json());
 
 /* set cross origin request configuration */
 corsConfig(app);
