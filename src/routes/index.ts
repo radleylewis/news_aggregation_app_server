@@ -1,9 +1,10 @@
-import express from 'express';
+import { Application } from 'express';
+import authRoutes from './auth.routes';
+import sourceRoutes from './source.routes';
 
-const routeRegistry = (app: express.Application) => {
-  app.get('/', (req, res, next) => {
-    res.status(200).send(`hello world`)
-  });
+const routeRegistry = (app: Application) => {
+  app.use('/auth', authRoutes);
+  app.use('/sources', sourceRoutes);
 };
 
 export default routeRegistry;
