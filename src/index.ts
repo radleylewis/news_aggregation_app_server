@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+
 import routeRegistry from './routes';
 import { corsConfig } from './utils';
 
@@ -19,5 +20,17 @@ corsConfig(app);
 /* register routes on app */
 routeRegistry(app);
 
-// tslint:disable-next-line:no-console
-app.listen(port, () => console.log(`server listening on port ${port} 🚀`));
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    // tslint:disable-next-line:no-console
+    console.log(`DB connection established.`);
+    return app.listen(port);
+  })
+  .then(() => {
+    // tslint:disable-next-line:no-console
+    console.log(`Server listening on port ${port} 🚀`);
+  })
+  .catch((err: Error) => {
+    // tslint:disable-next-line:no-console
+    console.error(err);
+  });
