@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { IAuthController } from '../interfaces';
+import { IAuthController, IUserInterface } from '../interfaces';
 
 class AuthController implements IAuthController {
+
   /* METHOD: sign-up for new users */
   signUp(req: Request, res: Response, next: NextFunction) {
-    res.status(201).send('signed up');
+    const newUserData: IUserInterface.IUserNew = req.body;
+
+    res.status(201).send(JSON.stringify(newUserData));
   };
 
   /* METHOD: sign-in for existing users */
