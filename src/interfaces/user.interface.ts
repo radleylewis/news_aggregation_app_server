@@ -1,4 +1,4 @@
-interface IUserNew {
+interface INewUser {
   username: string,
   password: string,
   surname: string,
@@ -7,5 +7,5 @@ interface IUserNew {
 };
 
 export {
-  IUserNew,
+  INewUser,
 };

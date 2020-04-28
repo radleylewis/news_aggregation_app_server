@@ -6,9 +6,9 @@ class AuthController implements IAuthController {
 
   /* METHOD: sign-up for new users */
   signUp(req: Request, res: Response, next: NextFunction) {
-    const newUserData: IUserInterface.IUserNew = req.body;
+    const newUser: IUserInterface.INewUser = req.body;
 
-    res.status(201).send(JSON.stringify(newUserData));
+    res.status(201).send(JSON.stringify(newUser));
   };
 
   /* METHOD: sign-in for existing users */
