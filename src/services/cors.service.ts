@@ -1,6 +1,6 @@
 import express from 'express';
 
-const corsConfig = (app: express.Application) => {
+const corsService = (app: express.Application) => {
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', '*');
@@ -9,4 +9,4 @@ const corsConfig = (app: express.Application) => {
   });
 };
 
-export default corsConfig;
+export default corsService;

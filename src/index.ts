@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-import routeRegistry from './routes';
-import { corsConfig } from './utils';
+import routeRegistry from './routers';
+import { corsService } from './services';
 
 /* initialize configuration */
 dotenv.config();
@@ -15,7 +15,7 @@ const port = process.env.SERVER_PORT;
 app.use(bodyParser.json());
 
 /* set cross origin request configuration */
-corsConfig(app);
+corsService(app);
 
 /* register routes on app */
 routeRegistry(app);

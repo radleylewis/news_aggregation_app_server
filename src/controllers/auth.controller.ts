@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { securityService } from '../services';
 
 import { IAuthController, IUserInterface } from '../interfaces';
 import { UserModel } from '../models';
@@ -6,15 +7,14 @@ import { UserModel } from '../models';
 class AuthController implements IAuthController {
 
   /* METHOD: sign-up for new users */
-  signUp(req: Request, res: Response, next: NextFunction) {
+  async signUp(req: Request, res: Response, next: NextFunction) {
     try {
       const userData: IUserInterface.IUserData = req.body;
-      const user = new UserModel(userData);
-      user.save();
-      res.status(201).send(JSON.stringify(userData));
+      userData.password = await securityService.hashPassword(userData.password)
+      const result = await new UserModel(userData).save();
+      res.status(201).send({ user_id: result._id });
     } catch (err) {
-      // tslint:disable-next-line:no-console
-      console.log(err);
+      res.status(500).send({ error: err.message });
     };
   };
 
