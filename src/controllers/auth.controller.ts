@@ -10,9 +10,9 @@ class AuthController implements IAuthController {
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {
       const userData: IUserInterface.IUserData = req.body;
-      userData.password = await securityService.hashPassword(userData.password)
-      const result = await new UserModel(userData).save();
-      res.status(201).send({ user_id: result._id });
+      userData.password = await securityService.hashPassword(userData.password);
+      const { _id } = await new UserModel(userData).save();
+      res.status(201).send({ user_id: _id });
     } catch (err) {
       res.status(500).send({ error: err.message });
     };
