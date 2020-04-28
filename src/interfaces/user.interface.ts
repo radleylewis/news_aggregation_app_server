@@ -1,11 +1,10 @@
-interface INewUser {
+interface IUserData {
   username: string,
   password: string,
-  surname: string,
   email: string,
   preferences: string[],
 };
 
 export {
-  INewUser,
+  IUserData,
 };

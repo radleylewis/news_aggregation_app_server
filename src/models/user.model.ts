@@ -7,12 +7,6 @@ const userSchema = new Schema({
   password: {
     type: String,
   },
-  first_name: {
-    type: String,
-  },
-  surname: {
-    type: String,
-  },
   email: {
     type: String,
   },
