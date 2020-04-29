@@ -1,12 +1,23 @@
-import { hash } from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-
-const hashPassword = async (password: string) => {
+const hashPassword = (password: string) => {
   const saltRounds = +process.env.SALT_ROUNDS;
-  const result = await hash(password, saltRounds);
-  return result;
+  return hash(password, saltRounds);
+};
+
+const comparePassword = (password: string, userHash: string) => {
+  return compare(password, userHash);
+};
+
+const generateToken = (email: string, userId: string) => {
+  const jwtSecret = process.env.JWT_SECRET;
+  const jwtExpiry = process.env.JWT_EXPIRY;
+  return jwt.sign({ email, userId }, jwtSecret, { expiresIn: jwtExpiry });
 };
 
 export {
   hashPassword,
+  comparePassword,
+  generateToken,
 };
