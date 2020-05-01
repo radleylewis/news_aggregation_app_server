@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 import routeRegistry from './routers';
-import { corsService } from './services';
+import { cors, catchErrors } from './middleware';
 
 /* initialize configuration */
 dotenv.config();
@@ -15,10 +15,13 @@ const port = process.env.SERVER_PORT;
 app.use(bodyParser.json());
 
 /* set cross origin request configuration */
-corsService(app);
+cors(app);
 
 /* register routes on app */
 routeRegistry(app);
+
+/* catch and handler errors */
+catchErrors(app);
 
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {

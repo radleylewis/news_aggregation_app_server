@@ -2,7 +2,7 @@
   "name": "news_aggregation_app_server",
   "version": "1.0.0",
   "description": "news aggregator backend express.js service",
-  "main": "dist/index.js",
+  "main": "dist/index",
   "scripts": {
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "tsc": "tsc",
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/radleylewis/news_aggregation_app_server#readme",
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.6",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/mongoose": "^5.7.13",
     "bcryptjs": "^2.4.3",
@@ -36,7 +37,6 @@
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.6",
     "@types/node": "^13.13.2",
     "body-parser": "^1.19.0",
     "nodemon": "^2.0.3",
