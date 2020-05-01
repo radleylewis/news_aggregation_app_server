@@ -1,5 +1,5 @@
-import asyncHandler from './asyncFunction.middleware';
+import authenticate from './authentication.middleware';
 
 export {
-  asyncHandler,
+  authenticate,
 };

@@ -19,6 +19,4 @@ const userSchema = new Schema({
   },
 });
 
-const User = model<IUserInterface.IUserData>('User', userSchema);
-export default User;
-
+export default model<IUserInterface.IUserData>('User', userSchema);
