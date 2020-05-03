@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { ISourceController } from '../interfaces';
+import { ISourceInterface } from '../interfaces';
 
-class SourceController implements ISourceController {
+class SourceController implements ISourceInterface.ISourceController {
   deploySources(req: Request, res: Response, next: NextFunction) {
     res.status(200).send('deploy sources');
   };

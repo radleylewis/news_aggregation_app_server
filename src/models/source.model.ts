@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
 
+import { ISourceInterface } from '../interfaces';
+
 const sourceSchema = new Schema({
   id: {
     type: String,
@@ -35,4 +37,4 @@ const sourceSchema = new Schema({
 
 });
 
-export default model('Source', sourceSchema);
+export default model<ISourceInterface.ISourceData>('Source', sourceSchema);

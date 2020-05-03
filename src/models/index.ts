@@ -1,9 +1,9 @@
-import article from './article.model';
-import source from './source.model';
+import Article from './article.model';
+import Source from './source.model';
 import User from './user.model';
 
 export {
-  article,
-  source,
+  Article,
+  Source,
   User,
 };
