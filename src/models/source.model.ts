@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 import { ISourceInterface } from '../interfaces';
 
-const sourceSchema = new Schema({
+const sourceSchema: Schema = new Schema({
   id: {
     type: String,
   },

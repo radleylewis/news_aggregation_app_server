@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 import { IArticleInterface } from '../interfaces';
 
-const articleSchema = new Schema({
+const articleSchema: Schema = new Schema({
   source_name: {
     type: String,
   },
@@ -14,5 +14,5 @@ const articleSchema = new Schema({
   }
 });
 
-export default model<IArticleInterface.IArticleData>('Article', articleSchema);
+export default model<IArticleInterface.IArticle>('Article', articleSchema);
 

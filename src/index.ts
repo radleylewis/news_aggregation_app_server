@@ -5,9 +5,13 @@ import mongoose from 'mongoose';
 
 import routeRegistry from './routers';
 import { cors, catchErrors } from './middleware';
+import { getSources, getLatestArticles } from './processes';
 
 /* initialize configuration */
 dotenv.config();
+
+/* initiated dedicated article fetch thread */
+// getLatestArticles();
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -30,10 +34,12 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopolo
     return app.listen(port);
   })
   .then(() => {
+    /* fetch source data */
+    getSources();
     // tslint:disable-next-line:no-console
     console.log(`Server listening on port ${port} 🚀`);
   })
   .catch((err: Error) => {
     // tslint:disable-next-line:no-console
-    console.error(err);
+    console.error(`Server failure: ${err.message}`);
   });

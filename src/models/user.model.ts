@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 import { IUserInterface } from '../interfaces';
 
-const userSchema = new Schema({
+const userSchema: Schema = new Schema({
   username: {
     type: String,
   },
