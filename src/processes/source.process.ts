@@ -13,7 +13,7 @@ pipe.write('Child Process: "sources" initiated...');
 request(url)
   .then((res: sourceResponse) => {
     pipe.write('sources: success on API request');
-    return new Source.insertMany(res.sources);
+    return Source.insertMany(res.sources);
   })
   .then((data) => {
     // tslint:disable-next-line:no-console
