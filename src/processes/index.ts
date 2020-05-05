@@ -17,8 +17,14 @@ const getSources = () => {
     stdio: [null, null, null, 'pipe'],
   });
   child.stdio[3].on('data', (data) => {
-    // tslint:disable-next-line:no-console
-    console.log(data.toString());
+    if (data.toString() === 'kill') {
+      // tslint:disable-next-line:no-console
+      console.log('sources process: success, killing child thread.');
+      child.kill();
+    } else {
+      // tslint:disable-next-line:no-console
+      console.log(data.toString());
+    };
   });
 };
 
@@ -27,19 +33,3 @@ export {
   getSources,
 };
 
-// const { spawn } = require('child_process')
-
-// const test = () => {
-//     const child = spawn(process.execPath, [`${__dirname}/test.js`], {
-//         stdio: [null, null, null, 'pipe'],
-//     });
-
-//     child.stdio[3].on('data', function (data) {
-//         // tslint:disable-next-line:no-console
-//         console.log('hej')
-//         console.log(data.toString());
-//     });
-// }
-
-// exports.default = test()
-// //# sourceMappingURL=index.js.map

@@ -1,28 +1,29 @@
 import request from 'request-promise';
 import { Socket } from 'net';
+import { connect } from 'mongoose';
 
-import { Source } from '../models';
+import { Source, User } from '../models';
 import { ISourceInterface } from '../interfaces';
 
 const pipe = new Socket({ fd: 3 });
 
-const url = `https://newsapi.org/v2/sources?apiKey=${process.env.NEWS_API_KEY}`;
+const uri = `https://newsapi.org/v2/sources?apiKey=${process.env.NEWS_API_KEY}`;
 
-pipe.write('Child Process: "sources" initiated...');
-
-request(url)
-  .then((res: sourceResponse) => {
-    pipe.write('sources: success on API request');
-    return Source.insertMany(res.sources);
+connect(process.env.DATABASE)
+  .then(() => {
+    pipe.write('sources process: db connection established')
+    return request({ uri, json: true });
+  })
+  .then(({ sources }: sourceResponse) => {
+    pipe.write('sources process: success on API request');
+    return Source.insertMany(sources);
   })
   .then((data) => {
-    // tslint:disable-next-line:no-console
-    pipe.write('sources: success on DB insert');
-    pipe.write(JSON.stringify(data));
+    pipe.write(`sources process: success inserting ${data.length} entries to db`);
+    pipe.write('kill');
   })
-  .catch((err: Error) => {
-    // tslint:disable-next-line:no-console
-    pipe.write(`Sources Fetch: failure with error ${err.message}`)
+  .catch((err) => {
+    pipe.write(`sources process: failure with error ${err.message}`)
   });
 
 type sourceResponse = {

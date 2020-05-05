@@ -24,17 +24,6 @@ const sourceSchema: Schema = new Schema({
   language: {
     type: String,
   },
-  rating: {
-    type: Number,
-    default: 0,
-  },
-  articles: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Article',
-    }
-  ]
-
 });
 
 export default model<ISourceInterface.ISourceData>('Source', sourceSchema);
