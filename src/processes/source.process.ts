@@ -2,12 +2,12 @@ import request from 'request-promise';
 import { Socket } from 'net';
 import { connect } from 'mongoose';
 
-import { Source, User } from '../models';
+import { Source } from '../models';
 import { ISourceInterface } from '../interfaces';
 
 const pipe = new Socket({ fd: 3 });
 
-const uri = `https://newsapi.org/v2/sources?apiKey=${process.env.NEWS_API_KEY}`;
+const uri = `${process.env.NEWS_API_URL}v2/sources?apiKey=${process.env.NEWS_API_KEY}`;
 
 connect(process.env.DATABASE)
   .then(() => {

@@ -10,6 +10,9 @@ import { getSources, getLatestArticles } from './processes';
 /* initialize configuration */
 dotenv.config();
 
+/* fetch sources and insert to db */
+if (+process.env.SET_SOURCES) getSources();
+
 /* initiated dedicated article fetch thread */
 // getLatestArticles();
 
@@ -30,16 +33,14 @@ catchErrors(app);
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     // tslint:disable-next-line:no-console
-    console.log(`DB connection established.`);
+    console.log(`main process: db connection established`);
     return app.listen(port);
   })
   .then(() => {
-    /* fetch source data */
-    getSources();
     // tslint:disable-next-line:no-console
-    console.log(`Server listening on port ${port} 🚀`);
+    console.log(`main process: server listening on port ${port} 🚀`);
   })
   .catch((err: Error) => {
     // tslint:disable-next-line:no-console
-    console.error(`Server failure: ${err.message}`);
+    console.error(`main process: server failure: ${err.message}`);
   });
