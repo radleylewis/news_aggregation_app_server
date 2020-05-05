@@ -1,33 +1,48 @@
 import request from 'request-promise';
 import net from 'net';
+import { connect } from 'mongoose';
 
 import { Source, Article } from '../models';
 
 const pipe = new net.Socket({ fd: 3 });
 
-const initiateNewsUpdate = async () => {
-  pipe.write('News Update: initiated.');
-  const sources = await Source.find({});
-  for (const source of sources) {
-    const url = `${process.env.NEWS_API_URL}sources=${source.id}&${process.env.NEWS_API_KEY}`;
-    request(url)
-      .then((res) => {
-        const DBEntry = {
-          sourceID: res.id,
-          sourceName: res.name,
-          stories: res.articles,
-        };
-        const article = new Article(DBEntry);
-        article.save();
-      })
-      .catch(err => {
-        pipe.write(`News Update: failure for ${source.id}.`)
-      })
-  };
+const _fetchSourceArticles = (id: string) => {
+  const uri = `${process.env.NEWS_API_URL}/v2/top-headlines?sources=${id}&apiKey=${process.env.NEWS_API_KEY}`;
+  request({ uri, json: true })
+    .then(res => {
+      const articleBatch = res.articles.map((article: ResArticle) => {
+        return (({ source, ...residual }) => ({ ...residual, source_id: source.id, source: source.name }))(article);
+      });
+      return Article.insertMany(articleBatch);
+    })
+    .catch(err => {
+      pipe.write(`article process: failure fetching articles for ${id} with ${err.message}`);
+    });
 };
 
-initiateNewsUpdate();
-// exports.newsWorker = () => {
-//   setInterval(() => { initiateNewsUpdate(); }, +process.env.NEWS_FREQUENCY);
-// };
+connect(process.env.DATABASE)
+  .then(() => {
+    pipe.write('article process: db connection established');
+    return Source.find({});
+  })
+  .then(sources => {
+    pipe.write('article process: success fetching sources');
+    sources.forEach(source => { _fetchSourceArticles(source.id) });
+    // setInterval(data.forEach(source => { _fetchSourceArticles(source.id) }), process.env.NEWS_FREQUENCY);
+  })
+  .catch(err => {
+    pipe.write(`article process: failure with error ${err.message}`)
+  });
 
+type ResArticle = {
+  source: {
+    id: string,
+    name: string,
+  },
+  author: string,
+  title: string,
+  url: string,
+  urlToImage: string,
+  publishedAt: string,
+  content: string,
+};

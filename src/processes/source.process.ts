@@ -6,8 +6,7 @@ import { Source } from '../models';
 import { ISourceInterface } from '../interfaces';
 
 const pipe = new Socket({ fd: 3 });
-
-const uri = `${process.env.NEWS_API_URL}v2/sources?apiKey=${process.env.NEWS_API_KEY}`;
+const uri = `${process.env.NEWS_API_URL}/v2/sources?apiKey=${process.env.NEWS_API_KEY}`;
 
 connect(process.env.DATABASE)
   .then(() => {
@@ -23,7 +22,7 @@ connect(process.env.DATABASE)
     pipe.write('kill');
   })
   .catch((err) => {
-    pipe.write(`sources process: failure with error ${err.message}`)
+    pipe.write(`sources process: failure with error ${err.message}`);
   });
 
 type sourceResponse = {

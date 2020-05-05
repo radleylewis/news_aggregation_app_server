@@ -14,20 +14,15 @@ dotenv.config();
 if (+process.env.SET_SOURCES) getSources();
 
 /* initiated dedicated article fetch thread */
-// getLatestArticles();
+getLatestArticles();
 
 const app = express();
 const port = process.env.SERVER_PORT;
 
+/* apply middleware */
 app.use(bodyParser.json());
-
-/* set cross origin request configuration */
 cors(app);
-
-/* register routes on app */
 routeRegistry(app);
-
-/* catch and handler errors */
 catchErrors(app);
 
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })

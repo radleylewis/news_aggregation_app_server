@@ -7,7 +7,7 @@ const getLatestArticles = () => {
   });
   latestArticlesProcess.stdio[3].on('data', (data) => {
     // tslint:disable-next-line:no-console
-    console.log(data);
+    console.log(data.toString());
   });
 };
 
