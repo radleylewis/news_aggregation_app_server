@@ -4,7 +4,7 @@
 
 This application simplifies your search for the latest breaking news across 120+ different news sources. Simply select your favourite news sources and your feed will be updated on a minute by minute basis.
 
-##### Note: the associated client frontend is located [here](https://github.com/radleylewis/news_aggregation_app_client.git). (Very basic app in dear need of a refactor - coming soon (to Android)!)
+##### Note: the associated client frontend is located [here](https://github.com/radleylewis/news_aggregation_app_client.git). (Very basic app in dear need of a refactor - coming soon!)
 
 ## Getting Started
 1. Clone the repository
@@ -31,18 +31,19 @@ $ npm run dev
 
 ## Notes
 
-This project is for practice purposes only. Specifically, I played around with the following tools/languages/libraries building this backend service:
+This is a practice project. Specifically, I played around with the following tools/languages/libraries while building this backend service:
 - Node child processes
 - TypeScript
 - Express.js
 - Mongoose/MongoDB
-- JsonWebTokens
-- Bcrypt
+- JsonWebToken
+- bcrypt.js
 - VIM
-
+- Postman
+  
 Examples of my deployed projects:
 - [Saga47Swan](www.saga47swan.com): React/Django hosted with Heroku
-- [myEGO2GO](www.myego2go.com): my full time employer where I work as a full-stack developer
+- [myEGO2GO](www.myego2go.com): where I work as a developer
 
 ## Author
 

@@ -6,6 +6,6 @@ const authRouter = express.Router();
 
 authRouter.get('/', sourceController.deploySources);
 
-authRouter.post('/', sourceController.addPrefSource);
+authRouter.patch('/', sourceController.addPrefSource);
 
 export default authRouter;

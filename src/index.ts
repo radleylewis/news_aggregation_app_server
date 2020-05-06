@@ -25,7 +25,7 @@ cors(app);
 routeRegistry(app);
 catchErrors(app);
 
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => {
     // tslint:disable-next-line:no-console
     console.log(`main process: db connection established`);

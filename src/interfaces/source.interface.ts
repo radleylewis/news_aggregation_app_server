@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
+import { type } from 'os';
 
 interface ISourceController {
   deploySources(req: Request, res: Response, next: NextFunction): void,
@@ -16,6 +17,11 @@ interface ISourceData extends Document {
   rating: string,
 };
 
+type ISourcePreferences = {
+  preferences: string[],
+  username: string,
+};
+
 type ISourceResponse = {
   status: string,
   sources: ISourceData[],
@@ -24,5 +30,6 @@ type ISourceResponse = {
 export {
   ISourceController,
   ISourceData,
+  ISourcePreferences,
   ISourceResponse,
 };
