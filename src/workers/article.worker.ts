@@ -1,19 +1,19 @@
 import request from 'request-promise';
-import net from 'net';
+import { Socket } from 'net';
 import { connect } from 'mongoose';
 
 import { Source, Article } from '../models';
 import { IArticleInterface } from '../interfaces';
 
-const pipe = new net.Socket({ fd: 3 });
+const pipe = new Socket({ fd: 3 });
 
 const _fetchSourceArticles = (id: string) => {
   const uri = `${process.env.NEWS_API_URL}/v2/top-headlines?sources=${id}&apiKey=${process.env.NEWS_API_KEY}`;
   request({ uri, json: true })
     .then(res => {
-      const articleBatch = res.articles.map((article: IArticleInterface.IResArticle) => {
-        return (({ source, ...residual }) => ({ ...residual, source_id: source.id, source: source.name }))(article);
-      });
+      const articleBatch = res.articles.map((article: IArticleInterface.IResArticle) => (
+        ({ source, ...residual }) => ({ ...residual, source_id: source.id, source: source.name }))(article)
+      );
       return Article.insertMany(articleBatch);
     })
     .catch(err => {
@@ -30,7 +30,7 @@ connect(process.env.DATABASE)
     pipe.write('article process: success fetching sources');
     setInterval(() => {
       sources.forEach(source => _fetchSourceArticles(source.id));
-      pipe.write('article process: success on article update cycle. Waiting for next cycle... ');
+      pipe.write('article process: article update cycle complete. Waiting for next cycle... ');
     }, +process.env.NEWS_FREQUENCY);
   })
   .catch(err => {
