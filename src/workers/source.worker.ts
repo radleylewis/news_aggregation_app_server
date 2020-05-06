@@ -13,7 +13,7 @@ connect(process.env.DATABASE)
     pipe.write('sources process: db connection established')
     return request({ uri, json: true });
   })
-  .then(({ sources }: sourceResponse) => {
+  .then(({ sources }: ISourceInterface.ISourceResponse) => {
     pipe.write('sources process: success on API request');
     return Source.insertMany(sources);
   })
@@ -25,7 +25,3 @@ connect(process.env.DATABASE)
     pipe.write(`sources process: failure with error ${err.message}`);
   });
 
-type sourceResponse = {
-  status: string,
-  sources: ISourceInterface.ISourceData[],
-};

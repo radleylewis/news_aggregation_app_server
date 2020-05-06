@@ -16,7 +16,13 @@ interface ISourceData extends Document {
   rating: string,
 };
 
+type ISourceResponse = {
+  status: string,
+  sources: ISourceData[],
+};
+
 export {
   ISourceController,
   ISourceData,
+  ISourceResponse,
 };

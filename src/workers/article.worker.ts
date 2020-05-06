@@ -3,6 +3,7 @@ import net from 'net';
 import { connect } from 'mongoose';
 
 import { Source, Article } from '../models';
+import { IArticleInterface } from '../interfaces';
 
 const pipe = new net.Socket({ fd: 3 });
 
@@ -10,7 +11,7 @@ const _fetchSourceArticles = (id: string) => {
   const uri = `${process.env.NEWS_API_URL}/v2/top-headlines?sources=${id}&apiKey=${process.env.NEWS_API_KEY}`;
   request({ uri, json: true })
     .then(res => {
-      const articleBatch = res.articles.map((article: ResArticle) => {
+      const articleBatch = res.articles.map((article: IArticleInterface.IResArticle) => {
         return (({ source, ...residual }) => ({ ...residual, source_id: source.id, source: source.name }))(article);
       });
       return Article.insertMany(articleBatch);
@@ -34,15 +35,3 @@ connect(process.env.DATABASE)
     pipe.write(`article process: failure with error ${err.message}`)
   });
 
-type ResArticle = {
-  source: {
-    id: string,
-    name: string,
-  },
-  author: string,
-  title: string,
-  url: string,
-  urlToImage: string,
-  publishedAt: string,
-  content: string,
-};
