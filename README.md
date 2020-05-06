@@ -31,14 +31,18 @@ $ npm run dev
 
 ## Notes
 
-This is purely for learning purposes only. Specifically, I employed the following tools/languages/libraries for practice while building this backend service:
-- worker threads
+This project is for practice purposes only. Specifically, I played around with the following tools/languages/libraries building this backend service:
+- Node child processes
 - TypeScript
 - Express.js
 - Mongoose/MongoDB
 - JsonWebTokens
 - Bcrypt
 - VIM
+
+Examples of my deployed projects:
+- [Saga47Swan](www.saga47swan.com): React/Django hosted with Heroku
+- [myEGO2GO](www.myego2go.com): my full time employer where I work as a full-stack developer
 
 ## Author
 
