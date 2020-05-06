@@ -28,8 +28,10 @@ connect(process.env.DATABASE)
   })
   .then(sources => {
     pipe.write('article process: success fetching sources');
-    sources.forEach(source => { _fetchSourceArticles(source.id) });
-    // setInterval(data.forEach(source => { _fetchSourceArticles(source.id) }), process.env.NEWS_FREQUENCY);
+    setInterval(() => {
+      sources.forEach(source => _fetchSourceArticles(source.id));
+      pipe.write('article process: success on article update cycle. Waiting for next cycle... ');
+    }, +process.env.NEWS_FREQUENCY);
   })
   .catch(err => {
     pipe.write(`article process: failure with error ${err.message}`)
