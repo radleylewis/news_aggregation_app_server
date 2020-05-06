@@ -1,7 +1,7 @@
 import { spawn } from 'child_process';
 
 const getLatestArticles = () => {
-  const latestArticlesProcess = spawn(process.execPath, [`${__dirname}/article.process.js`], {
+  const latestArticlesProcess = spawn(process.execPath, [`${__dirname}/article.worker.js`], {
     detached: true,
     stdio: [null, null, null, 'pipe'],
   });
@@ -12,7 +12,7 @@ const getLatestArticles = () => {
 };
 
 const getSources = () => {
-  const child = spawn(process.execPath, [`${__dirname}/source.process.js`], {
+  const child = spawn(process.execPath, [`${__dirname}/source.worker.js`], {
     detached: true,
     stdio: [null, null, null, 'pipe'],
   });

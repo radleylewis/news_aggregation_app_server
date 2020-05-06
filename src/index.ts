@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 
 import routeRegistry from './routers';
 import { cors, catchErrors } from './middleware';
-import { getSources, getLatestArticles } from './processes';
+import { getSources, getLatestArticles } from './workers';
 
 /* initialize configuration */
 dotenv.config();
