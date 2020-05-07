@@ -5,4 +5,6 @@ interface IAuthController {
   signIn(req: Request, res: Response, next: NextFunction): void,
 };
 
-export default IAuthController;
+export {
+  IAuthController,
+};

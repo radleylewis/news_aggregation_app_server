@@ -1,10 +1,9 @@
 import AuthController from './auth.controller';
 import SourceController from './source.controller';
-
-const authController = new AuthController();
-const sourceController = new SourceController();
+import UserController from './user.controller'
 
 export {
-  authController,
-  sourceController,
+  AuthController,
+  SourceController,
+  UserController,
 };

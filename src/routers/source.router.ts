@@ -1,11 +1,11 @@
-import express from 'express';
+import { Router } from 'express';
 
-import { sourceController } from '../controllers';
+import { ISourceInterface } from '../interfaces';
 
-const authRouter = express.Router();
+const sourceRouter = (sourceController: ISourceInterface.ISourceController) => {
+  const router = Router();
+  router.get('/', sourceController.deploySources);
+  return router;
+};
 
-authRouter.get('/', sourceController.deploySources);
-
-authRouter.patch('/', sourceController.addPrefSource);
-
-export default authRouter;
+export default sourceRouter;

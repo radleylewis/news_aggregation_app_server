@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { IArticleInterface } from '../interfaces';
+import { ISourceInterface } from '../interfaces';
 
 const articleSchema: Schema = new Schema({
   source_id: { type: String, required: true },
@@ -13,5 +13,5 @@ const articleSchema: Schema = new Schema({
   content: String,
 });
 
-export default model<IArticleInterface.IArticle>('Article', articleSchema);
+export default model<ISourceInterface.IArticle>('Article', articleSchema);
 

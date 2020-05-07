@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
-import { type } from 'os';
 
 interface ISourceController {
   deploySources(req: Request, res: Response, next: NextFunction): void,
-  addPrefSource(req: Request, res: Response, next: NextFunction): void,
 };
 
 interface ISourceData extends Document {
@@ -17,9 +15,28 @@ interface ISourceData extends Document {
   rating: string,
 };
 
-type ISourcePreferences = {
-  preferences: string[],
-  username: string,
+interface IArticle extends Document {
+  source_id: string,
+  name: string,
+  author: string,
+  title: string,
+  url: string,
+  urlToImage: string,
+  publishedAt: string,
+  content: string,
+};
+
+interface IResArticle {
+  source: {
+    id: string,
+    name: string,
+  },
+  author: string,
+  title: string,
+  url: string,
+  urlToImage: string,
+  publishedAt: string,
+  content: string,
 };
 
 type ISourceResponse = {
@@ -30,6 +47,7 @@ type ISourceResponse = {
 export {
   ISourceController,
   ISourceData,
-  ISourcePreferences,
   ISourceResponse,
+  IArticle,
+  IResArticle,
 };

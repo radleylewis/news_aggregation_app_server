@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { securityService } from '../services';
 
-import { IAuthController, IUserInterface } from '../interfaces';
+import { IAuthInterface, IUserInterface } from '../interfaces';
 import { User } from '../models';
 
-class AuthController implements IAuthController {
+class AuthController implements IAuthInterface.IAuthController {
 
   /* METHOD: sign-up for new users */
   async signUp(req: Request, res: Response, next: NextFunction) {

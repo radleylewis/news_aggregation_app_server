@@ -3,7 +3,7 @@ import { Socket } from 'net';
 import { connect } from 'mongoose';
 
 import { Source, Article } from '../models';
-import { IArticleInterface } from '../interfaces';
+import { ISourceInterface } from '../interfaces';
 
 const pipe = new Socket({ fd: 3 });
 
@@ -11,7 +11,7 @@ const _fetchSourceArticles = (id: string) => {
   const uri = `${process.env.NEWS_API_URL}/v2/top-headlines?sources=${id}&apiKey=${process.env.NEWS_API_KEY}`;
   request({ uri, json: true })
     .then(res => {
-      const articleBatch = res.articles.map((article: IArticleInterface.IResArticle) => (
+      const articleBatch = res.articles.map((article: ISourceInterface.IResArticle) => (
         ({ source, ...residual }) => ({ ...residual, source_id: source.id, source: source.name }))(article)
       );
       return Article.insertMany(articleBatch);
