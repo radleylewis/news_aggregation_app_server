@@ -2,9 +2,10 @@ import { Router } from 'express';
 
 import { ISourceInterface } from '../interfaces';
 
+const router = Router();
+
 const sourceRouter = (sourceController: ISourceInterface.ISourceController) => {
-  const router = Router();
-  router.get('/', sourceController.deploySources);
+  router.get('/', sourceController.listSources);
   return router;
 };
 

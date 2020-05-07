@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Document } from 'mongoose';
 
 interface ISourceController {
-  deploySources(req: Request, res: Response, next: NextFunction): void,
+  listSources(req: Request, res: Response, next: NextFunction): void,
 };
 
 interface ISourceData extends Document {
