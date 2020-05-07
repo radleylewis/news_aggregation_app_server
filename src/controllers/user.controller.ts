@@ -13,7 +13,7 @@ class UserController implements IUserInterface.IUserController {
       await User.findOneAndUpdate({ username }, { preferences }, options);
       res.status(200).send();
     } catch (err) {
-      res.status(500).send({ error: err.message });
+      next(err);
     };
   };
 };

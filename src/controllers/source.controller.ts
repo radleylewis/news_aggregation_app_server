@@ -11,7 +11,7 @@ class SourceController implements ISourceInterface.ISourceController {
       const sourceList = await Source.find({});
       res.status(200).send(sourceList);
     } catch (err) {
-      res.status(500).send({ error: err.message });
+      next(err);
     };
   };
 };

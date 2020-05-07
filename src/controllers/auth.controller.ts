@@ -14,7 +14,7 @@ class AuthController implements IAuthInterface.IAuthController {
       const { _id } = await new User(userData).save();
       res.status(201).send({ user_id: _id });
     } catch (err) {
-      res.status(500).send({ error: err.message });
+      next(err);
     };
   };
 
@@ -29,7 +29,7 @@ class AuthController implements IAuthInterface.IAuthController {
       const token = securityService.generateToken(user.email, user._id.toString());
       res.status(200).send({ token });
     } catch (err) {
-      res.status(500).send({ error: err.message });
+      next(err);
     };
   };
 };
