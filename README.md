@@ -2,9 +2,9 @@
 
 ## Summary
 
-With more than 100 global news sources this application simplifies your search for the latest breaking news. Simply select your favourite news sources and your feed will be updated on a minute by minute basis.
+This application simplifies your search for the latest breaking news across 120+ different news sources. Simply select your favourite news sources and your feed will be updated on a minute by minute basis.
 
-##### Note: The main read-me can me found in the associated client repository [here](https://github.com/radleylewis/news_aggregation_app_client.git)
+##### Note: the associated client frontend is located [here](https://github.com/radleylewis/news_aggregation_app_client.git). (Very basic app in dear need of a refactor - coming soon!)
 
 ## Getting Started
 1. Clone the repository
@@ -19,29 +19,31 @@ $ npm install
 ```
 
 3. Set up [News API](https://newsapi.org/)
-The news stories for the application are provided by [News API](https://newsapi.org/). In order to run the server please sign up as a developer and obtain your unique key.
+The news stories for the application are provided by [News API](https://newsapi.org/). In order to run the server please sign up as a developer and obtain your unique `apiKey`.
 
 4. Set up the environment
-Create a '.env' file in the main directory ('news_aggregation_app_server/') and fill it in accordingly.
-```dotenv
-Example:
+Create a '.env' file in the main directory ('news_aggregation_app_server/') and fill it in accordingly. An example .env has can be located in the repo. 
 
-LOCAL_HOST_PORT=3001
-
-NEWS_API_KEY=//Obtained from News API
-NEWS_API_URL=https://newsapi.org/v2/top-headlines?
-
-DATABASE_URL=mongodb://127.0.0.1:27017/
-DATABASE_NAME=news_app_db
-```
 5. Run the development Server
 ```bash
-$ npm serve
+$ npm run dev
 ```
 
-## Contributing
+## Notes
 
-Any contribution is welcome, just fork the repository and do your thing. Then submit a pull request pointing to this repo.
+This is a practice project. Specifically, I played around with the following tools/languages/libraries while building this backend service:
+- Node child processes
+- TypeScript
+- Express.js
+- Mongoose/MongoDB
+- JsonWebToken
+- bcrypt.js
+- VIM
+- Postman
+  
+Examples of my deployed projects:
+- [Saga47Swan](www.saga47swan.com): React/Django hosted with Heroku
+- [myEGO2GO](www.myego2go.com): where I work as a developer
 
 ## Author
 
