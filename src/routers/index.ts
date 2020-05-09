@@ -2,7 +2,6 @@ import { Application } from 'express';
 
 import { authenticate } from '../middleware';
 import { AuthController, UserController, SourceController } from '../controllers';
-import { ISourceInterface, IUserInterface, IAuthInterface } from '../interfaces';
 
 const authController = new AuthController();
 const userController = new UserController();
