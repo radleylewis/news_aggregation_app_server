@@ -42,8 +42,9 @@ This is a practice project. Specifically, I played around with the following too
 - Postman
   
 Examples of my deployed projects:
+- [RT Reporting](www.rtreporting.com): Startup of which I am a co-founder and CTO
 - [Saga47Swan](www.saga47swan.com): React/Django hosted with Heroku
-- [myEGO2GO](www.myego2go.com): where I work as a developer
+- [myEGO](www.myego.io): previous employer
 
 ## Author
 
